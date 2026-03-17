@@ -8,40 +8,41 @@ on:
 
 jobs:
   lint:
-    name: Lint with Ruff
+    name: Линтинг с Ruff
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      - name: Проверка кода
         uses: actions/checkout@v4
 
-      - name: Setup Python
+      - name: Настройка Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.10'
 
-      - name: Install Ruff
+      - name: Установка Ruff
         run: pip install ruff==0.14.6
 
-      - name: Run Ruff check
+      - name: Запуск Ruff проверки
         run: ruff check --output-format=github
 
   test:
-    name: Run Unit Tests
+    name: Запуск модульных тестов
     runs-on: ubuntu-latest
     needs: lint
     steps:
-      - name: Checkout code
+      - name: Проверка кода
         uses: actions/checkout@v4
 
-      - name: Setup Python
+      - name: Настройка Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.10'
 
-      - name: Install dependencies
+      - name: Установка зависимостей
         run: pip install -r requirements.txt
 
-      - name: Run tests
+      - name: Запуск тестов
         run: |
           pip install -e .
           python -m pytest test_class_car.py -v
+
